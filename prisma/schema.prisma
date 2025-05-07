@@ -1,0 +1,69 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/client"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id             Int            @id @default(autoincrement())
+    username       String         @unique
+    email          String         @unique
+    password       String
+    displayName    String?
+    avatarInitials String?
+    tasks          Task[]
+    shoppingItems  ShoppingItem[]
+    notes          Note[]
+    activities     Activity[]
+    createdAt      DateTime       @default(now())
+    updatedAt      DateTime       @default(now()) @updatedAt
+}
+
+model Task {
+    id        Int      @id @default(autoincrement())
+    title     String
+    completed Boolean  @default(false)
+    priority  String   @default("medium")
+    category  String   @default("General")
+    createdAt DateTime @default(now())
+    userId    Int?
+    user      User?    @relation(fields: [userId], references: [id])
+}
+
+model ShoppingItem {
+    id        Int      @id @default(autoincrement())
+    name      String
+    quantity  Int      @default(1)
+    unit      String   @default("un")
+    category  String   @default("General")
+    purchased Boolean  @default(false)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now()) @updatedAt
+    userId    Int?
+    user      User?    @relation(fields: [userId], references: [id])
+}
+
+model Note {
+    id        Int      @id @default(autoincrement())
+    title     String
+    content   String
+    color     String   @default("blue")
+    createdAt DateTime @default(now())
+    userId    Int?
+    user      User?    @relation(fields: [userId], references: [id])
+}
+
+model Activity {
+    id          Int      @id @default(autoincrement())
+    type        String
+    description String
+    entityId    Int?
+    entityType  String?
+    createdAt   DateTime @default(now())
+    userId      Int?
+    user        User?    @relation(fields: [userId], references: [id])
+}
