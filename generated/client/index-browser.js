@@ -178,7 +178,50 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Priority = exports.$Enums.Priority = {
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  LOW: 'LOW'
+};
 
+exports.Category = exports.$Enums.Category = {
+  GENERAL: 'GENERAL',
+  DEVELOPMENT: 'DEVELOPMENT',
+  DESIGN: 'DESIGN',
+  WORK: 'WORK',
+  SEARCH: 'SEARCH'
+};
+
+exports.Unit = exports.$Enums.Unit = {
+  UN: 'UN',
+  KG: 'KG',
+  G: 'G',
+  L: 'L',
+  ML: 'ML',
+  PCT: 'PCT',
+  CX: 'CX'
+};
+
+exports.ShoppingCategory = exports.$Enums.ShoppingCategory = {
+  GENERAL: 'GENERAL',
+  GROCERY: 'GROCERY',
+  FRUITS: 'FRUITS',
+  VEGETABLES: 'VEGETABLES',
+  DAIRY: 'DAIRY',
+  BAKERY: 'BAKERY',
+  MEAT: 'MEAT',
+  BEVERAGES: 'BEVERAGES',
+  CLEANING: 'CLEANING',
+  HOUSEHOLD: 'HOUSEHOLD'
+};
+
+exports.NoteColor = exports.$Enums.NoteColor = {
+  BLUE: 'BLUE',
+  GREEN: 'GREEN',
+  PURPLE: 'PURPLE',
+  YELLOW: 'YELLOW',
+  RED: 'RED'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

@@ -40,6 +40,91 @@ export type Note = $Result.DefaultSelection<Prisma.$NotePayload>
 export type Activity = $Result.DefaultSelection<Prisma.$ActivityPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Category: {
+  GENERAL: 'GENERAL',
+  DEVELOPMENT: 'DEVELOPMENT',
+  DESIGN: 'DESIGN',
+  WORK: 'WORK',
+  SEARCH: 'SEARCH'
+};
+
+export type Category = (typeof Category)[keyof typeof Category]
+
+
+export const Priority: {
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  LOW: 'LOW'
+};
+
+export type Priority = (typeof Priority)[keyof typeof Priority]
+
+
+export const ShoppingCategory: {
+  GENERAL: 'GENERAL',
+  GROCERY: 'GROCERY',
+  FRUITS: 'FRUITS',
+  VEGETABLES: 'VEGETABLES',
+  DAIRY: 'DAIRY',
+  BAKERY: 'BAKERY',
+  MEAT: 'MEAT',
+  BEVERAGES: 'BEVERAGES',
+  CLEANING: 'CLEANING',
+  HOUSEHOLD: 'HOUSEHOLD'
+};
+
+export type ShoppingCategory = (typeof ShoppingCategory)[keyof typeof ShoppingCategory]
+
+
+export const Unit: {
+  UN: 'UN',
+  KG: 'KG',
+  G: 'G',
+  L: 'L',
+  ML: 'ML',
+  PCT: 'PCT',
+  CX: 'CX'
+};
+
+export type Unit = (typeof Unit)[keyof typeof Unit]
+
+
+export const NoteColor: {
+  BLUE: 'BLUE',
+  GREEN: 'GREEN',
+  PURPLE: 'PURPLE',
+  YELLOW: 'YELLOW',
+  RED: 'RED'
+};
+
+export type NoteColor = (typeof NoteColor)[keyof typeof NoteColor]
+
+}
+
+export type Category = $Enums.Category
+
+export const Category: typeof $Enums.Category
+
+export type Priority = $Enums.Priority
+
+export const Priority: typeof $Enums.Priority
+
+export type ShoppingCategory = $Enums.ShoppingCategory
+
+export const ShoppingCategory: typeof $Enums.ShoppingCategory
+
+export type Unit = $Enums.Unit
+
+export const Unit: typeof $Enums.Unit
+
+export type NoteColor = $Enums.NoteColor
+
+export const NoteColor: typeof $Enums.NoteColor
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -2541,8 +2626,8 @@ export namespace Prisma {
     id: number | null
     title: string | null
     completed: boolean | null
-    priority: string | null
-    category: string | null
+    priority: $Enums.Priority | null
+    category: $Enums.Category | null
     createdAt: Date | null
     userId: number | null
   }
@@ -2551,8 +2636,8 @@ export namespace Prisma {
     id: number | null
     title: string | null
     completed: boolean | null
-    priority: string | null
-    category: string | null
+    priority: $Enums.Priority | null
+    category: $Enums.Category | null
     createdAt: Date | null
     userId: number | null
   }
@@ -2700,8 +2785,8 @@ export namespace Prisma {
     id: number
     title: string
     completed: boolean
-    priority: string
-    category: string
+    priority: $Enums.Priority
+    category: $Enums.Category
     createdAt: Date
     userId: number | null
     _count: TaskCountAggregateOutputType | null
@@ -2788,8 +2873,8 @@ export namespace Prisma {
       id: number
       title: string
       completed: boolean
-      priority: string
-      category: string
+      priority: $Enums.Priority
+      category: $Enums.Category
       createdAt: Date
       userId: number | null
     }, ExtArgs["result"]["task"]>
@@ -3219,8 +3304,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Task", 'Int'>
     readonly title: FieldRef<"Task", 'String'>
     readonly completed: FieldRef<"Task", 'Boolean'>
-    readonly priority: FieldRef<"Task", 'String'>
-    readonly category: FieldRef<"Task", 'String'>
+    readonly priority: FieldRef<"Task", 'Priority'>
+    readonly category: FieldRef<"Task", 'Category'>
     readonly createdAt: FieldRef<"Task", 'DateTime'>
     readonly userId: FieldRef<"Task", 'Int'>
   }
@@ -3682,8 +3767,8 @@ export namespace Prisma {
     id: number | null
     name: string | null
     quantity: number | null
-    unit: string | null
-    category: string | null
+    unit: $Enums.Unit | null
+    category: $Enums.ShoppingCategory | null
     purchased: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3694,8 +3779,8 @@ export namespace Prisma {
     id: number | null
     name: string | null
     quantity: number | null
-    unit: string | null
-    category: string | null
+    unit: $Enums.Unit | null
+    category: $Enums.ShoppingCategory | null
     purchased: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3855,8 +3940,8 @@ export namespace Prisma {
     id: number
     name: string
     quantity: number
-    unit: string
-    category: string
+    unit: $Enums.Unit
+    category: $Enums.ShoppingCategory
     purchased: boolean
     createdAt: Date
     updatedAt: Date
@@ -3953,8 +4038,8 @@ export namespace Prisma {
       id: number
       name: string
       quantity: number
-      unit: string
-      category: string
+      unit: $Enums.Unit
+      category: $Enums.ShoppingCategory
       purchased: boolean
       createdAt: Date
       updatedAt: Date
@@ -4386,8 +4471,8 @@ export namespace Prisma {
     readonly id: FieldRef<"ShoppingItem", 'Int'>
     readonly name: FieldRef<"ShoppingItem", 'String'>
     readonly quantity: FieldRef<"ShoppingItem", 'Int'>
-    readonly unit: FieldRef<"ShoppingItem", 'String'>
-    readonly category: FieldRef<"ShoppingItem", 'String'>
+    readonly unit: FieldRef<"ShoppingItem", 'Unit'>
+    readonly category: FieldRef<"ShoppingItem", 'ShoppingCategory'>
     readonly purchased: FieldRef<"ShoppingItem", 'Boolean'>
     readonly createdAt: FieldRef<"ShoppingItem", 'DateTime'>
     readonly updatedAt: FieldRef<"ShoppingItem", 'DateTime'>
@@ -4849,7 +4934,7 @@ export namespace Prisma {
     id: number | null
     title: string | null
     content: string | null
-    color: string | null
+    color: $Enums.NoteColor | null
     createdAt: Date | null
     userId: number | null
   }
@@ -4858,7 +4943,7 @@ export namespace Prisma {
     id: number | null
     title: string | null
     content: string | null
-    color: string | null
+    color: $Enums.NoteColor | null
     createdAt: Date | null
     userId: number | null
   }
@@ -5002,7 +5087,7 @@ export namespace Prisma {
     id: number
     title: string
     content: string
-    color: string
+    color: $Enums.NoteColor
     createdAt: Date
     userId: number | null
     _count: NoteCountAggregateOutputType | null
@@ -5085,7 +5170,7 @@ export namespace Prisma {
       id: number
       title: string
       content: string
-      color: string
+      color: $Enums.NoteColor
       createdAt: Date
       userId: number | null
     }, ExtArgs["result"]["note"]>
@@ -5515,7 +5600,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Note", 'Int'>
     readonly title: FieldRef<"Note", 'String'>
     readonly content: FieldRef<"Note", 'String'>
-    readonly color: FieldRef<"Note", 'String'>
+    readonly color: FieldRef<"Note", 'NoteColor'>
     readonly createdAt: FieldRef<"Note", 'DateTime'>
     readonly userId: FieldRef<"Note", 'Int'>
   }
@@ -7220,6 +7305,41 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Priority'
+   */
+  export type EnumPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Priority'>
+    
+
+
+  /**
+   * Reference to a field of type 'Category'
+   */
+  export type EnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Category'>
+    
+
+
+  /**
+   * Reference to a field of type 'Unit'
+   */
+  export type EnumUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Unit'>
+    
+
+
+  /**
+   * Reference to a field of type 'ShoppingCategory'
+   */
+  export type EnumShoppingCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ShoppingCategory'>
+    
+
+
+  /**
+   * Reference to a field of type 'NoteColor'
+   */
+  export type EnumNoteColorFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NoteColor'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -7317,8 +7437,8 @@ export namespace Prisma {
     id?: IntFilter<"Task"> | number
     title?: StringFilter<"Task"> | string
     completed?: BoolFilter<"Task"> | boolean
-    priority?: StringFilter<"Task"> | string
-    category?: StringFilter<"Task"> | string
+    priority?: EnumPriorityFilter<"Task"> | $Enums.Priority
+    category?: EnumCategoryFilter<"Task"> | $Enums.Category
     createdAt?: DateTimeFilter<"Task"> | Date | string
     userId?: IntNullableFilter<"Task"> | number | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -7342,8 +7462,8 @@ export namespace Prisma {
     NOT?: TaskWhereInput | TaskWhereInput[]
     title?: StringFilter<"Task"> | string
     completed?: BoolFilter<"Task"> | boolean
-    priority?: StringFilter<"Task"> | string
-    category?: StringFilter<"Task"> | string
+    priority?: EnumPriorityFilter<"Task"> | $Enums.Priority
+    category?: EnumCategoryFilter<"Task"> | $Enums.Category
     createdAt?: DateTimeFilter<"Task"> | Date | string
     userId?: IntNullableFilter<"Task"> | number | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -7371,8 +7491,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Task"> | number
     title?: StringWithAggregatesFilter<"Task"> | string
     completed?: BoolWithAggregatesFilter<"Task"> | boolean
-    priority?: StringWithAggregatesFilter<"Task"> | string
-    category?: StringWithAggregatesFilter<"Task"> | string
+    priority?: EnumPriorityWithAggregatesFilter<"Task"> | $Enums.Priority
+    category?: EnumCategoryWithAggregatesFilter<"Task"> | $Enums.Category
     createdAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
     userId?: IntNullableWithAggregatesFilter<"Task"> | number | null
   }
@@ -7384,8 +7504,8 @@ export namespace Prisma {
     id?: IntFilter<"ShoppingItem"> | number
     name?: StringFilter<"ShoppingItem"> | string
     quantity?: IntFilter<"ShoppingItem"> | number
-    unit?: StringFilter<"ShoppingItem"> | string
-    category?: StringFilter<"ShoppingItem"> | string
+    unit?: EnumUnitFilter<"ShoppingItem"> | $Enums.Unit
+    category?: EnumShoppingCategoryFilter<"ShoppingItem"> | $Enums.ShoppingCategory
     purchased?: BoolFilter<"ShoppingItem"> | boolean
     createdAt?: DateTimeFilter<"ShoppingItem"> | Date | string
     updatedAt?: DateTimeFilter<"ShoppingItem"> | Date | string
@@ -7413,8 +7533,8 @@ export namespace Prisma {
     NOT?: ShoppingItemWhereInput | ShoppingItemWhereInput[]
     name?: StringFilter<"ShoppingItem"> | string
     quantity?: IntFilter<"ShoppingItem"> | number
-    unit?: StringFilter<"ShoppingItem"> | string
-    category?: StringFilter<"ShoppingItem"> | string
+    unit?: EnumUnitFilter<"ShoppingItem"> | $Enums.Unit
+    category?: EnumShoppingCategoryFilter<"ShoppingItem"> | $Enums.ShoppingCategory
     purchased?: BoolFilter<"ShoppingItem"> | boolean
     createdAt?: DateTimeFilter<"ShoppingItem"> | Date | string
     updatedAt?: DateTimeFilter<"ShoppingItem"> | Date | string
@@ -7446,8 +7566,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"ShoppingItem"> | number
     name?: StringWithAggregatesFilter<"ShoppingItem"> | string
     quantity?: IntWithAggregatesFilter<"ShoppingItem"> | number
-    unit?: StringWithAggregatesFilter<"ShoppingItem"> | string
-    category?: StringWithAggregatesFilter<"ShoppingItem"> | string
+    unit?: EnumUnitWithAggregatesFilter<"ShoppingItem"> | $Enums.Unit
+    category?: EnumShoppingCategoryWithAggregatesFilter<"ShoppingItem"> | $Enums.ShoppingCategory
     purchased?: BoolWithAggregatesFilter<"ShoppingItem"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"ShoppingItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ShoppingItem"> | Date | string
@@ -7461,7 +7581,7 @@ export namespace Prisma {
     id?: IntFilter<"Note"> | number
     title?: StringFilter<"Note"> | string
     content?: StringFilter<"Note"> | string
-    color?: StringFilter<"Note"> | string
+    color?: EnumNoteColorFilter<"Note"> | $Enums.NoteColor
     createdAt?: DateTimeFilter<"Note"> | Date | string
     userId?: IntNullableFilter<"Note"> | number | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -7484,7 +7604,7 @@ export namespace Prisma {
     NOT?: NoteWhereInput | NoteWhereInput[]
     title?: StringFilter<"Note"> | string
     content?: StringFilter<"Note"> | string
-    color?: StringFilter<"Note"> | string
+    color?: EnumNoteColorFilter<"Note"> | $Enums.NoteColor
     createdAt?: DateTimeFilter<"Note"> | Date | string
     userId?: IntNullableFilter<"Note"> | number | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -7511,7 +7631,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Note"> | number
     title?: StringWithAggregatesFilter<"Note"> | string
     content?: StringWithAggregatesFilter<"Note"> | string
-    color?: StringWithAggregatesFilter<"Note"> | string
+    color?: EnumNoteColorWithAggregatesFilter<"Note"> | $Enums.NoteColor
     createdAt?: DateTimeWithAggregatesFilter<"Note"> | Date | string
     userId?: IntNullableWithAggregatesFilter<"Note"> | number | null
   }
@@ -7676,8 +7796,8 @@ export namespace Prisma {
   export type TaskCreateInput = {
     title: string
     completed?: boolean
-    priority?: string
-    category?: string
+    priority?: $Enums.Priority
+    category?: $Enums.Category
     createdAt?: Date | string
     user?: UserCreateNestedOneWithoutTasksInput
   }
@@ -7686,8 +7806,8 @@ export namespace Prisma {
     id?: number
     title: string
     completed?: boolean
-    priority?: string
-    category?: string
+    priority?: $Enums.Priority
+    category?: $Enums.Category
     createdAt?: Date | string
     userId?: number | null
   }
@@ -7695,8 +7815,8 @@ export namespace Prisma {
   export type TaskUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     completed?: BoolFieldUpdateOperationsInput | boolean
-    priority?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutTasksNestedInput
   }
@@ -7705,8 +7825,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     completed?: BoolFieldUpdateOperationsInput | boolean
-    priority?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -7715,8 +7835,8 @@ export namespace Prisma {
     id?: number
     title: string
     completed?: boolean
-    priority?: string
-    category?: string
+    priority?: $Enums.Priority
+    category?: $Enums.Category
     createdAt?: Date | string
     userId?: number | null
   }
@@ -7724,8 +7844,8 @@ export namespace Prisma {
   export type TaskUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     completed?: BoolFieldUpdateOperationsInput | boolean
-    priority?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7733,8 +7853,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     completed?: BoolFieldUpdateOperationsInput | boolean
-    priority?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -7742,8 +7862,8 @@ export namespace Prisma {
   export type ShoppingItemCreateInput = {
     name: string
     quantity?: number
-    unit?: string
-    category?: string
+    unit?: $Enums.Unit
+    category?: $Enums.ShoppingCategory
     purchased?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7754,8 +7874,8 @@ export namespace Prisma {
     id?: number
     name: string
     quantity?: number
-    unit?: string
-    category?: string
+    unit?: $Enums.Unit
+    category?: $Enums.ShoppingCategory
     purchased?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7765,8 +7885,8 @@ export namespace Prisma {
   export type ShoppingItemUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    unit?: EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+    category?: EnumShoppingCategoryFieldUpdateOperationsInput | $Enums.ShoppingCategory
     purchased?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7777,8 +7897,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    unit?: EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+    category?: EnumShoppingCategoryFieldUpdateOperationsInput | $Enums.ShoppingCategory
     purchased?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7789,8 +7909,8 @@ export namespace Prisma {
     id?: number
     name: string
     quantity?: number
-    unit?: string
-    category?: string
+    unit?: $Enums.Unit
+    category?: $Enums.ShoppingCategory
     purchased?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7800,8 +7920,8 @@ export namespace Prisma {
   export type ShoppingItemUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    unit?: EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+    category?: EnumShoppingCategoryFieldUpdateOperationsInput | $Enums.ShoppingCategory
     purchased?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7811,8 +7931,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    unit?: EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+    category?: EnumShoppingCategoryFieldUpdateOperationsInput | $Enums.ShoppingCategory
     purchased?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7822,7 +7942,7 @@ export namespace Prisma {
   export type NoteCreateInput = {
     title: string
     content: string
-    color?: string
+    color?: $Enums.NoteColor
     createdAt?: Date | string
     user?: UserCreateNestedOneWithoutNotesInput
   }
@@ -7831,7 +7951,7 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
-    color?: string
+    color?: $Enums.NoteColor
     createdAt?: Date | string
     userId?: number | null
   }
@@ -7839,7 +7959,7 @@ export namespace Prisma {
   export type NoteUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    color?: EnumNoteColorFieldUpdateOperationsInput | $Enums.NoteColor
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutNotesNestedInput
   }
@@ -7848,7 +7968,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    color?: EnumNoteColorFieldUpdateOperationsInput | $Enums.NoteColor
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -7857,7 +7977,7 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
-    color?: string
+    color?: $Enums.NoteColor
     createdAt?: Date | string
     userId?: number | null
   }
@@ -7865,7 +7985,7 @@ export namespace Prisma {
   export type NoteUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    color?: EnumNoteColorFieldUpdateOperationsInput | $Enums.NoteColor
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7873,7 +7993,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    color?: EnumNoteColorFieldUpdateOperationsInput | $Enums.NoteColor
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -8149,6 +8269,20 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Priority | EnumPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.Priority[]
+    notIn?: $Enums.Priority[]
+    not?: NestedEnumPriorityFilter<$PrismaModel> | $Enums.Priority
+  }
+
+  export type EnumCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.Category[]
+    notIn?: $Enums.Category[]
+    not?: NestedEnumCategoryFilter<$PrismaModel> | $Enums.Category
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -8213,6 +8347,26 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EnumPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Priority | EnumPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.Priority[]
+    notIn?: $Enums.Priority[]
+    not?: NestedEnumPriorityWithAggregatesFilter<$PrismaModel> | $Enums.Priority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPriorityFilter<$PrismaModel>
+    _max?: NestedEnumPriorityFilter<$PrismaModel>
+  }
+
+  export type EnumCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.Category[]
+    notIn?: $Enums.Category[]
+    not?: NestedEnumCategoryWithAggregatesFilter<$PrismaModel> | $Enums.Category
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCategoryFilter<$PrismaModel>
+    _max?: NestedEnumCategoryFilter<$PrismaModel>
+  }
+
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -8227,6 +8381,20 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumUnitFilter<$PrismaModel = never> = {
+    equals?: $Enums.Unit | EnumUnitFieldRefInput<$PrismaModel>
+    in?: $Enums.Unit[]
+    notIn?: $Enums.Unit[]
+    not?: NestedEnumUnitFilter<$PrismaModel> | $Enums.Unit
+  }
+
+  export type EnumShoppingCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShoppingCategory | EnumShoppingCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.ShoppingCategory[]
+    notIn?: $Enums.ShoppingCategory[]
+    not?: NestedEnumShoppingCategoryFilter<$PrismaModel> | $Enums.ShoppingCategory
   }
 
   export type ShoppingItemCountOrderByAggregateInput = {
@@ -8277,6 +8445,33 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type EnumUnitWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Unit | EnumUnitFieldRefInput<$PrismaModel>
+    in?: $Enums.Unit[]
+    notIn?: $Enums.Unit[]
+    not?: NestedEnumUnitWithAggregatesFilter<$PrismaModel> | $Enums.Unit
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUnitFilter<$PrismaModel>
+    _max?: NestedEnumUnitFilter<$PrismaModel>
+  }
+
+  export type EnumShoppingCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShoppingCategory | EnumShoppingCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.ShoppingCategory[]
+    notIn?: $Enums.ShoppingCategory[]
+    not?: NestedEnumShoppingCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ShoppingCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumShoppingCategoryFilter<$PrismaModel>
+    _max?: NestedEnumShoppingCategoryFilter<$PrismaModel>
+  }
+
+  export type EnumNoteColorFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteColor | EnumNoteColorFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteColor[]
+    notIn?: $Enums.NoteColor[]
+    not?: NestedEnumNoteColorFilter<$PrismaModel> | $Enums.NoteColor
+  }
+
   export type NoteCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -8312,6 +8507,16 @@ export namespace Prisma {
   export type NoteSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+  }
+
+  export type EnumNoteColorWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteColor | EnumNoteColorFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteColor[]
+    notIn?: $Enums.NoteColor[]
+    not?: NestedEnumNoteColorWithAggregatesFilter<$PrismaModel> | $Enums.NoteColor
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNoteColorFilter<$PrismaModel>
+    _max?: NestedEnumNoteColorFilter<$PrismaModel>
   }
 
   export type ActivityCountOrderByAggregateInput = {
@@ -8554,6 +8759,14 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type EnumPriorityFieldUpdateOperationsInput = {
+    set?: $Enums.Priority
+  }
+
+  export type EnumCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.Category
+  }
+
   export type UserUpdateOneWithoutTasksNestedInput = {
     create?: XOR<UserCreateWithoutTasksInput, UserUncheckedCreateWithoutTasksInput>
     connectOrCreate?: UserCreateOrConnectWithoutTasksInput
@@ -8578,6 +8791,14 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type EnumUnitFieldUpdateOperationsInput = {
+    set?: $Enums.Unit
+  }
+
+  export type EnumShoppingCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.ShoppingCategory
+  }
+
   export type UserUpdateOneWithoutShoppingItemsNestedInput = {
     create?: XOR<UserCreateWithoutShoppingItemsInput, UserUncheckedCreateWithoutShoppingItemsInput>
     connectOrCreate?: UserCreateOrConnectWithoutShoppingItemsInput
@@ -8592,6 +8813,10 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutNotesInput, UserUncheckedCreateWithoutNotesInput>
     connectOrCreate?: UserCreateOrConnectWithoutNotesInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type EnumNoteColorFieldUpdateOperationsInput = {
+    set?: $Enums.NoteColor
   }
 
   export type UserUpdateOneWithoutNotesNestedInput = {
@@ -8761,12 +8986,46 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Priority | EnumPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.Priority[]
+    notIn?: $Enums.Priority[]
+    not?: NestedEnumPriorityFilter<$PrismaModel> | $Enums.Priority
+  }
+
+  export type NestedEnumCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.Category[]
+    notIn?: $Enums.Category[]
+    not?: NestedEnumCategoryFilter<$PrismaModel> | $Enums.Category
+  }
+
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Priority | EnumPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.Priority[]
+    notIn?: $Enums.Priority[]
+    not?: NestedEnumPriorityWithAggregatesFilter<$PrismaModel> | $Enums.Priority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPriorityFilter<$PrismaModel>
+    _max?: NestedEnumPriorityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.Category[]
+    notIn?: $Enums.Category[]
+    not?: NestedEnumCategoryWithAggregatesFilter<$PrismaModel> | $Enums.Category
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCategoryFilter<$PrismaModel>
+    _max?: NestedEnumCategoryFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8796,11 +9055,62 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumUnitFilter<$PrismaModel = never> = {
+    equals?: $Enums.Unit | EnumUnitFieldRefInput<$PrismaModel>
+    in?: $Enums.Unit[]
+    notIn?: $Enums.Unit[]
+    not?: NestedEnumUnitFilter<$PrismaModel> | $Enums.Unit
+  }
+
+  export type NestedEnumShoppingCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShoppingCategory | EnumShoppingCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.ShoppingCategory[]
+    notIn?: $Enums.ShoppingCategory[]
+    not?: NestedEnumShoppingCategoryFilter<$PrismaModel> | $Enums.ShoppingCategory
+  }
+
+  export type NestedEnumUnitWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Unit | EnumUnitFieldRefInput<$PrismaModel>
+    in?: $Enums.Unit[]
+    notIn?: $Enums.Unit[]
+    not?: NestedEnumUnitWithAggregatesFilter<$PrismaModel> | $Enums.Unit
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUnitFilter<$PrismaModel>
+    _max?: NestedEnumUnitFilter<$PrismaModel>
+  }
+
+  export type NestedEnumShoppingCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShoppingCategory | EnumShoppingCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.ShoppingCategory[]
+    notIn?: $Enums.ShoppingCategory[]
+    not?: NestedEnumShoppingCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ShoppingCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumShoppingCategoryFilter<$PrismaModel>
+    _max?: NestedEnumShoppingCategoryFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNoteColorFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteColor | EnumNoteColorFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteColor[]
+    notIn?: $Enums.NoteColor[]
+    not?: NestedEnumNoteColorFilter<$PrismaModel> | $Enums.NoteColor
+  }
+
+  export type NestedEnumNoteColorWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteColor | EnumNoteColorFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteColor[]
+    notIn?: $Enums.NoteColor[]
+    not?: NestedEnumNoteColorWithAggregatesFilter<$PrismaModel> | $Enums.NoteColor
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNoteColorFilter<$PrismaModel>
+    _max?: NestedEnumNoteColorFilter<$PrismaModel>
+  }
+
   export type TaskCreateWithoutUserInput = {
     title: string
     completed?: boolean
-    priority?: string
-    category?: string
+    priority?: $Enums.Priority
+    category?: $Enums.Category
     createdAt?: Date | string
   }
 
@@ -8808,8 +9118,8 @@ export namespace Prisma {
     id?: number
     title: string
     completed?: boolean
-    priority?: string
-    category?: string
+    priority?: $Enums.Priority
+    category?: $Enums.Category
     createdAt?: Date | string
   }
 
@@ -8825,8 +9135,8 @@ export namespace Prisma {
   export type ShoppingItemCreateWithoutUserInput = {
     name: string
     quantity?: number
-    unit?: string
-    category?: string
+    unit?: $Enums.Unit
+    category?: $Enums.ShoppingCategory
     purchased?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8836,8 +9146,8 @@ export namespace Prisma {
     id?: number
     name: string
     quantity?: number
-    unit?: string
-    category?: string
+    unit?: $Enums.Unit
+    category?: $Enums.ShoppingCategory
     purchased?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8855,7 +9165,7 @@ export namespace Prisma {
   export type NoteCreateWithoutUserInput = {
     title: string
     content: string
-    color?: string
+    color?: $Enums.NoteColor
     createdAt?: Date | string
   }
 
@@ -8863,7 +9173,7 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
-    color?: string
+    color?: $Enums.NoteColor
     createdAt?: Date | string
   }
 
@@ -8925,8 +9235,8 @@ export namespace Prisma {
     id?: IntFilter<"Task"> | number
     title?: StringFilter<"Task"> | string
     completed?: BoolFilter<"Task"> | boolean
-    priority?: StringFilter<"Task"> | string
-    category?: StringFilter<"Task"> | string
+    priority?: EnumPriorityFilter<"Task"> | $Enums.Priority
+    category?: EnumCategoryFilter<"Task"> | $Enums.Category
     createdAt?: DateTimeFilter<"Task"> | Date | string
     userId?: IntNullableFilter<"Task"> | number | null
   }
@@ -8954,8 +9264,8 @@ export namespace Prisma {
     id?: IntFilter<"ShoppingItem"> | number
     name?: StringFilter<"ShoppingItem"> | string
     quantity?: IntFilter<"ShoppingItem"> | number
-    unit?: StringFilter<"ShoppingItem"> | string
-    category?: StringFilter<"ShoppingItem"> | string
+    unit?: EnumUnitFilter<"ShoppingItem"> | $Enums.Unit
+    category?: EnumShoppingCategoryFilter<"ShoppingItem"> | $Enums.ShoppingCategory
     purchased?: BoolFilter<"ShoppingItem"> | boolean
     createdAt?: DateTimeFilter<"ShoppingItem"> | Date | string
     updatedAt?: DateTimeFilter<"ShoppingItem"> | Date | string
@@ -8985,7 +9295,7 @@ export namespace Prisma {
     id?: IntFilter<"Note"> | number
     title?: StringFilter<"Note"> | string
     content?: StringFilter<"Note"> | string
-    color?: StringFilter<"Note"> | string
+    color?: EnumNoteColorFilter<"Note"> | $Enums.NoteColor
     createdAt?: DateTimeFilter<"Note"> | Date | string
     userId?: IntNullableFilter<"Note"> | number | null
   }
@@ -9303,8 +9613,8 @@ export namespace Prisma {
     id?: number
     title: string
     completed?: boolean
-    priority?: string
-    category?: string
+    priority?: $Enums.Priority
+    category?: $Enums.Category
     createdAt?: Date | string
   }
 
@@ -9312,8 +9622,8 @@ export namespace Prisma {
     id?: number
     name: string
     quantity?: number
-    unit?: string
-    category?: string
+    unit?: $Enums.Unit
+    category?: $Enums.ShoppingCategory
     purchased?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9323,7 +9633,7 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
-    color?: string
+    color?: $Enums.NoteColor
     createdAt?: Date | string
   }
 
@@ -9339,8 +9649,8 @@ export namespace Prisma {
   export type TaskUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     completed?: BoolFieldUpdateOperationsInput | boolean
-    priority?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9348,8 +9658,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     completed?: BoolFieldUpdateOperationsInput | boolean
-    priority?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9357,16 +9667,16 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     completed?: BoolFieldUpdateOperationsInput | boolean
-    priority?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ShoppingItemUpdateWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    unit?: EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+    category?: EnumShoppingCategoryFieldUpdateOperationsInput | $Enums.ShoppingCategory
     purchased?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9376,8 +9686,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    unit?: EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+    category?: EnumShoppingCategoryFieldUpdateOperationsInput | $Enums.ShoppingCategory
     purchased?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9387,8 +9697,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    unit?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    unit?: EnumUnitFieldUpdateOperationsInput | $Enums.Unit
+    category?: EnumShoppingCategoryFieldUpdateOperationsInput | $Enums.ShoppingCategory
     purchased?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9397,7 +9707,7 @@ export namespace Prisma {
   export type NoteUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    color?: EnumNoteColorFieldUpdateOperationsInput | $Enums.NoteColor
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9405,7 +9715,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    color?: EnumNoteColorFieldUpdateOperationsInput | $Enums.NoteColor
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9413,7 +9723,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    color?: EnumNoteColorFieldUpdateOperationsInput | $Enums.NoteColor
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

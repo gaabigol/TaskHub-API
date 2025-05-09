@@ -8,6 +8,51 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum Category {
+    GENERAL
+    DEVELOPMENT
+    DESIGN
+    WORK
+    SEARCH
+}
+
+enum Priority {
+    MEDIUM
+    HIGH
+    LOW
+}
+
+enum ShoppingCategory {
+    GENERAL
+    GROCERY
+    FRUITS
+    VEGETABLES
+    DAIRY
+    BAKERY
+    MEAT
+    BEVERAGES
+    CLEANING
+    HOUSEHOLD
+}
+
+enum Unit {
+    UN
+    KG
+    G
+    L
+    ML
+    PCT
+    CX
+}
+
+enum NoteColor {
+    BLUE
+    GREEN
+    PURPLE
+    YELLOW
+    RED
+}
+
 model User {
     id             Int            @id @default(autoincrement())
     username       String         @unique
@@ -27,34 +72,34 @@ model Task {
     id        Int      @id @default(autoincrement())
     title     String
     completed Boolean  @default(false)
-    priority  String   @default("medium")
-    category  String   @default("General")
+    priority  Priority @default(MEDIUM)
+    category  Category @default(GENERAL)
     createdAt DateTime @default(now())
     userId    Int?
     user      User?    @relation(fields: [userId], references: [id])
 }
 
 model ShoppingItem {
-    id        Int      @id @default(autoincrement())
+    id        Int              @id @default(autoincrement())
     name      String
-    quantity  Int      @default(1)
-    unit      String   @default("un")
-    category  String   @default("General")
-    purchased Boolean  @default(false)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now()) @updatedAt
+    quantity  Int              @default(1)
+    unit      Unit             @default(UN)
+    category  ShoppingCategory @default(GENERAL)
+    purchased Boolean          @default(false)
+    createdAt DateTime         @default(now())
+    updatedAt DateTime         @default(now()) @updatedAt
     userId    Int?
-    user      User?    @relation(fields: [userId], references: [id])
+    user      User?            @relation(fields: [userId], references: [id])
 }
 
 model Note {
-    id        Int      @id @default(autoincrement())
+    id        Int       @id @default(autoincrement())
     title     String
     content   String
-    color     String   @default("blue")
-    createdAt DateTime @default(now())
+    color     NoteColor @default(BLUE)
+    createdAt DateTime  @default(now())
     userId    Int?
-    user      User?    @relation(fields: [userId], references: [id])
+    user      User?     @relation(fields: [userId], references: [id])
 }
 
 model Activity {

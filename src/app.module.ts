@@ -13,6 +13,10 @@ import { ExceptionFilter } from './core/infrastructure/filters/exception-filter'
 import { ConfigModule } from '@nestjs/config'
 import { AuthModule } from './modules/auth/auth.module'
 import { UserModule } from './modules/user/user.module'
+import { TaskModule } from './modules/task/task.module'
+import { AuthGuardModule } from './core/infrastructure/guards/auth-guard.module'
+import { JwtGlobalModule } from './core/infrastructure/jwt/jwt.module'
+
 @Module({
     imports: [
         ThrottlerModule.forRoot([
@@ -25,6 +29,9 @@ import { UserModule } from './modules/user/user.module'
         ConfigModule.forRoot(),
         AuthModule,
         UserModule,
+        TaskModule,
+        AuthGuardModule,
+        JwtGlobalModule,
     ],
     controllers: [AppController],
     providers: [
