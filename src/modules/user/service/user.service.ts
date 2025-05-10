@@ -48,4 +48,10 @@ export class UserService {
         if (!user) throw new NotFoundException('User not found')
         return user
     }
+
+    async findById(id: number): Promise<User> {
+        const user = await this.repository.findById(id)
+        if (!user) throw new NotFoundException('User not found')
+        return user
+    }
 }

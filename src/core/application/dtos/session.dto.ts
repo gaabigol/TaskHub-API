@@ -1,4 +1,4 @@
-export class PayloadTokenDto {
+export class Session {
     sub: number
     email: string
     iat: number

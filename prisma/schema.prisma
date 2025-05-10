@@ -1,114 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 generator client {
-    provider = "prisma-client-js"
-    output   = "../generated/client"
+  provider = "prisma-client-js"
+  output   = "../generated/client"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 enum Category {
-    GENERAL
-    DEVELOPMENT
-    DESIGN
-    WORK
-    SEARCH
+  GENERAL
+  DEVELOPMENT
+  DESIGN
+  WORK
+  SEARCH
 }
 
 enum Priority {
-    MEDIUM
-    HIGH
-    LOW
+  MEDIUM
+  HIGH
+  LOW
 }
 
 enum ShoppingCategory {
-    GENERAL
-    GROCERY
-    FRUITS
-    VEGETABLES
-    DAIRY
-    BAKERY
-    MEAT
-    BEVERAGES
-    CLEANING
-    HOUSEHOLD
+  GENERAL
+  GROCERY
+  FRUITS
+  VEGETABLES
+  DAIRY
+  BAKERY
+  MEAT
+  BEVERAGES
+  CLEANING
+  HOUSEHOLD
 }
 
 enum Unit {
-    UN
-    KG
-    G
-    L
-    ML
-    PCT
-    CX
+  UN
+  KG
+  G
+  L
+  ML
+  PCT
+  CX
 }
 
 enum NoteColor {
-    BLUE
-    GREEN
-    PURPLE
-    YELLOW
-    RED
+  BLUE
+  GREEN
+  PURPLE
+  YELLOW
+  RED
 }
 
 model User {
-    id             Int            @id @default(autoincrement())
-    username       String         @unique
-    email          String         @unique
-    password       String
-    displayName    String?
-    avatarInitials String?
-    tasks          Task[]
-    shoppingItems  ShoppingItem[]
-    notes          Note[]
-    activities     Activity[]
-    createdAt      DateTime       @default(now())
-    updatedAt      DateTime       @default(now()) @updatedAt
+  id             Int            @id @default(autoincrement())
+  username       String         @unique
+  email          String         @unique
+  password       String
+  displayName    String?
+  avatarInitials String?
+  tasks          Task[]
+  shoppingItems  ShoppingItem[]
+  notes          Note[]
+  activities     Activity[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @default(now()) @updatedAt
 }
 
 model Task {
-    id        Int      @id @default(autoincrement())
-    title     String
-    completed Boolean  @default(false)
-    priority  Priority @default(MEDIUM)
-    category  Category @default(GENERAL)
-    createdAt DateTime @default(now())
-    userId    Int?
-    user      User?    @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  title     String
+  completed Boolean  @default(false)
+  priority  Priority @default(MEDIUM)
+  category  Category @default(GENERAL)
+  createdAt DateTime @default(now())
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
 }
 
 model ShoppingItem {
-    id        Int              @id @default(autoincrement())
-    name      String
-    quantity  Int              @default(1)
-    unit      Unit             @default(UN)
-    category  ShoppingCategory @default(GENERAL)
-    purchased Boolean          @default(false)
-    createdAt DateTime         @default(now())
-    updatedAt DateTime         @default(now()) @updatedAt
-    userId    Int?
-    user      User?            @relation(fields: [userId], references: [id])
+  id        Int              @id @default(autoincrement())
+  name      String
+  quantity  Int              @default(1)
+  unit      Unit             @default(UN)
+  category  ShoppingCategory @default(GENERAL)
+  purchased Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @default(now()) @updatedAt
+  userId    Int?
+  user      User?            @relation(fields: [userId], references: [id])
 }
 
 model Note {
-    id        Int       @id @default(autoincrement())
-    title     String
-    content   String
-    color     NoteColor @default(BLUE)
-    createdAt DateTime  @default(now())
-    userId    Int?
-    user      User?     @relation(fields: [userId], references: [id])
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String
+  color     NoteColor @default(BLUE)
+  createdAt DateTime  @default(now())
+  userId    Int?
+  user      User?     @relation(fields: [userId], references: [id])
 }
 
 model Activity {
-    id          Int      @id @default(autoincrement())
-    type        String
-    description String
-    entityId    Int?
-    entityType  String?
-    createdAt   DateTime @default(now())
-    userId      Int?
-    user        User?    @relation(fields: [userId], references: [id])
+  id          Int      @id @default(autoincrement())
+  type        String
+  description String
+  entityId    Int?
+  entityType  String?
+  createdAt   DateTime @default(now())
+  userId      Int?
+  user        User?    @relation(fields: [userId], references: [id])
 }
