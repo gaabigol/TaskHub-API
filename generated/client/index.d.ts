@@ -102,6 +102,30 @@ export const NoteColor: {
 
 export type NoteColor = (typeof NoteColor)[keyof typeof NoteColor]
 
+
+export const ActivityType: {
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT',
+  VIEW: 'VIEW',
+  OTHER: 'OTHER'
+};
+
+export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType]
+
+
+export const EntityType: {
+  TASK: 'TASK',
+  SHOPPING_ITEM: 'SHOPPING_ITEM',
+  NOTE: 'NOTE',
+  USER: 'USER',
+  SYSTEM: 'SYSTEM'
+};
+
+export type EntityType = (typeof EntityType)[keyof typeof EntityType]
+
 }
 
 export type Category = $Enums.Category
@@ -123,6 +147,14 @@ export const Unit: typeof $Enums.Unit
 export type NoteColor = $Enums.NoteColor
 
 export const NoteColor: typeof $Enums.NoteColor
+
+export type ActivityType = $Enums.ActivityType
+
+export const ActivityType: typeof $Enums.ActivityType
+
+export type EntityType = $Enums.EntityType
+
+export const EntityType: typeof $Enums.EntityType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -6060,20 +6092,24 @@ export namespace Prisma {
 
   export type ActivityMinAggregateOutputType = {
     id: number | null
-    type: string | null
-    description: string | null
+    type: $Enums.ActivityType | null
+    entityType: $Enums.EntityType | null
     entityId: number | null
-    entityType: string | null
+    details: string | null
+    ipAddress: string | null
+    userAgent: string | null
     createdAt: Date | null
     userId: number | null
   }
 
   export type ActivityMaxAggregateOutputType = {
     id: number | null
-    type: string | null
-    description: string | null
+    type: $Enums.ActivityType | null
+    entityType: $Enums.EntityType | null
     entityId: number | null
-    entityType: string | null
+    details: string | null
+    ipAddress: string | null
+    userAgent: string | null
     createdAt: Date | null
     userId: number | null
   }
@@ -6081,9 +6117,11 @@ export namespace Prisma {
   export type ActivityCountAggregateOutputType = {
     id: number
     type: number
-    description: number
-    entityId: number
     entityType: number
+    entityId: number
+    details: number
+    ipAddress: number
+    userAgent: number
     createdAt: number
     userId: number
     _all: number
@@ -6105,9 +6143,11 @@ export namespace Prisma {
   export type ActivityMinAggregateInputType = {
     id?: true
     type?: true
-    description?: true
-    entityId?: true
     entityType?: true
+    entityId?: true
+    details?: true
+    ipAddress?: true
+    userAgent?: true
     createdAt?: true
     userId?: true
   }
@@ -6115,9 +6155,11 @@ export namespace Prisma {
   export type ActivityMaxAggregateInputType = {
     id?: true
     type?: true
-    description?: true
-    entityId?: true
     entityType?: true
+    entityId?: true
+    details?: true
+    ipAddress?: true
+    userAgent?: true
     createdAt?: true
     userId?: true
   }
@@ -6125,9 +6167,11 @@ export namespace Prisma {
   export type ActivityCountAggregateInputType = {
     id?: true
     type?: true
-    description?: true
-    entityId?: true
     entityType?: true
+    entityId?: true
+    details?: true
+    ipAddress?: true
+    userAgent?: true
     createdAt?: true
     userId?: true
     _all?: true
@@ -6221,10 +6265,12 @@ export namespace Prisma {
 
   export type ActivityGroupByOutputType = {
     id: number
-    type: string
-    description: string
+    type: $Enums.ActivityType
+    entityType: $Enums.EntityType
     entityId: number | null
-    entityType: string | null
+    details: string | null
+    ipAddress: string | null
+    userAgent: string | null
     createdAt: Date
     userId: number | null
     _count: ActivityCountAggregateOutputType | null
@@ -6251,9 +6297,11 @@ export namespace Prisma {
   export type ActivitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     type?: boolean
-    description?: boolean
-    entityId?: boolean
     entityType?: boolean
+    entityId?: boolean
+    details?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | Activity$userArgs<ExtArgs>
@@ -6262,9 +6310,11 @@ export namespace Prisma {
   export type ActivitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     type?: boolean
-    description?: boolean
-    entityId?: boolean
     entityType?: boolean
+    entityId?: boolean
+    details?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | Activity$userArgs<ExtArgs>
@@ -6273,9 +6323,11 @@ export namespace Prisma {
   export type ActivitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     type?: boolean
-    description?: boolean
-    entityId?: boolean
     entityType?: boolean
+    entityId?: boolean
+    details?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | Activity$userArgs<ExtArgs>
@@ -6284,14 +6336,16 @@ export namespace Prisma {
   export type ActivitySelectScalar = {
     id?: boolean
     type?: boolean
-    description?: boolean
-    entityId?: boolean
     entityType?: boolean
+    entityId?: boolean
+    details?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
     createdAt?: boolean
     userId?: boolean
   }
 
-  export type ActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "description" | "entityId" | "entityType" | "createdAt" | "userId", ExtArgs["result"]["activity"]>
+  export type ActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "entityType" | "entityId" | "details" | "ipAddress" | "userAgent" | "createdAt" | "userId", ExtArgs["result"]["activity"]>
   export type ActivityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Activity$userArgs<ExtArgs>
   }
@@ -6309,10 +6363,12 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      type: string
-      description: string
+      type: $Enums.ActivityType
+      entityType: $Enums.EntityType
       entityId: number | null
-      entityType: string | null
+      details: string | null
+      ipAddress: string | null
+      userAgent: string | null
       createdAt: Date
       userId: number | null
     }, ExtArgs["result"]["activity"]>
@@ -6740,10 +6796,12 @@ export namespace Prisma {
    */
   interface ActivityFieldRefs {
     readonly id: FieldRef<"Activity", 'Int'>
-    readonly type: FieldRef<"Activity", 'String'>
-    readonly description: FieldRef<"Activity", 'String'>
+    readonly type: FieldRef<"Activity", 'ActivityType'>
+    readonly entityType: FieldRef<"Activity", 'EntityType'>
     readonly entityId: FieldRef<"Activity", 'Int'>
-    readonly entityType: FieldRef<"Activity", 'String'>
+    readonly details: FieldRef<"Activity", 'String'>
+    readonly ipAddress: FieldRef<"Activity", 'String'>
+    readonly userAgent: FieldRef<"Activity", 'String'>
     readonly createdAt: FieldRef<"Activity", 'DateTime'>
     readonly userId: FieldRef<"Activity", 'Int'>
   }
@@ -7245,9 +7303,11 @@ export namespace Prisma {
   export const ActivityScalarFieldEnum: {
     id: 'id',
     type: 'type',
-    description: 'description',
-    entityId: 'entityId',
     entityType: 'entityType',
+    entityId: 'entityId',
+    details: 'details',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent',
     createdAt: 'createdAt',
     userId: 'userId'
   };
@@ -7336,6 +7396,20 @@ export namespace Prisma {
    * Reference to a field of type 'NoteColor'
    */
   export type EnumNoteColorFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NoteColor'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActivityType'
+   */
+  export type EnumActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityType'>
+    
+
+
+  /**
+   * Reference to a field of type 'EntityType'
+   */
+  export type EnumEntityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EntityType'>
     
 
 
@@ -7641,10 +7715,12 @@ export namespace Prisma {
     OR?: ActivityWhereInput[]
     NOT?: ActivityWhereInput | ActivityWhereInput[]
     id?: IntFilter<"Activity"> | number
-    type?: StringFilter<"Activity"> | string
-    description?: StringFilter<"Activity"> | string
+    type?: EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
+    entityType?: EnumEntityTypeFilter<"Activity"> | $Enums.EntityType
     entityId?: IntNullableFilter<"Activity"> | number | null
-    entityType?: StringNullableFilter<"Activity"> | string | null
+    details?: StringNullableFilter<"Activity"> | string | null
+    ipAddress?: StringNullableFilter<"Activity"> | string | null
+    userAgent?: StringNullableFilter<"Activity"> | string | null
     createdAt?: DateTimeFilter<"Activity"> | Date | string
     userId?: IntNullableFilter<"Activity"> | number | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -7653,9 +7729,11 @@ export namespace Prisma {
   export type ActivityOrderByWithRelationInput = {
     id?: SortOrder
     type?: SortOrder
-    description?: SortOrder
+    entityType?: SortOrder
     entityId?: SortOrderInput | SortOrder
-    entityType?: SortOrderInput | SortOrder
+    details?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     userId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
@@ -7666,10 +7744,12 @@ export namespace Prisma {
     AND?: ActivityWhereInput | ActivityWhereInput[]
     OR?: ActivityWhereInput[]
     NOT?: ActivityWhereInput | ActivityWhereInput[]
-    type?: StringFilter<"Activity"> | string
-    description?: StringFilter<"Activity"> | string
+    type?: EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
+    entityType?: EnumEntityTypeFilter<"Activity"> | $Enums.EntityType
     entityId?: IntNullableFilter<"Activity"> | number | null
-    entityType?: StringNullableFilter<"Activity"> | string | null
+    details?: StringNullableFilter<"Activity"> | string | null
+    ipAddress?: StringNullableFilter<"Activity"> | string | null
+    userAgent?: StringNullableFilter<"Activity"> | string | null
     createdAt?: DateTimeFilter<"Activity"> | Date | string
     userId?: IntNullableFilter<"Activity"> | number | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -7678,9 +7758,11 @@ export namespace Prisma {
   export type ActivityOrderByWithAggregationInput = {
     id?: SortOrder
     type?: SortOrder
-    description?: SortOrder
+    entityType?: SortOrder
     entityId?: SortOrderInput | SortOrder
-    entityType?: SortOrderInput | SortOrder
+    details?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     userId?: SortOrderInput | SortOrder
     _count?: ActivityCountOrderByAggregateInput
@@ -7695,10 +7777,12 @@ export namespace Prisma {
     OR?: ActivityScalarWhereWithAggregatesInput[]
     NOT?: ActivityScalarWhereWithAggregatesInput | ActivityScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Activity"> | number
-    type?: StringWithAggregatesFilter<"Activity"> | string
-    description?: StringWithAggregatesFilter<"Activity"> | string
+    type?: EnumActivityTypeWithAggregatesFilter<"Activity"> | $Enums.ActivityType
+    entityType?: EnumEntityTypeWithAggregatesFilter<"Activity"> | $Enums.EntityType
     entityId?: IntNullableWithAggregatesFilter<"Activity"> | number | null
-    entityType?: StringNullableWithAggregatesFilter<"Activity"> | string | null
+    details?: StringNullableWithAggregatesFilter<"Activity"> | string | null
+    ipAddress?: StringNullableWithAggregatesFilter<"Activity"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"Activity"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
     userId?: IntNullableWithAggregatesFilter<"Activity"> | number | null
   }
@@ -7999,67 +8083,81 @@ export namespace Prisma {
   }
 
   export type ActivityCreateInput = {
-    type: string
-    description: string
+    type: $Enums.ActivityType
+    entityType: $Enums.EntityType
     entityId?: number | null
-    entityType?: string | null
+    details?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
     user?: UserCreateNestedOneWithoutActivitiesInput
   }
 
   export type ActivityUncheckedCreateInput = {
     id?: number
-    type: string
-    description: string
+    type: $Enums.ActivityType
+    entityType: $Enums.EntityType
     entityId?: number | null
-    entityType?: string | null
+    details?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
     userId?: number | null
   }
 
   export type ActivityUpdateInput = {
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
+    entityType?: EnumEntityTypeFieldUpdateOperationsInput | $Enums.EntityType
     entityId?: NullableIntFieldUpdateOperationsInput | number | null
-    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    details?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutActivitiesNestedInput
   }
 
   export type ActivityUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
+    entityType?: EnumEntityTypeFieldUpdateOperationsInput | $Enums.EntityType
     entityId?: NullableIntFieldUpdateOperationsInput | number | null
-    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    details?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ActivityCreateManyInput = {
     id?: number
-    type: string
-    description: string
+    type: $Enums.ActivityType
+    entityType: $Enums.EntityType
     entityId?: number | null
-    entityType?: string | null
+    details?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
     userId?: number | null
   }
 
   export type ActivityUpdateManyMutationInput = {
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
+    entityType?: EnumEntityTypeFieldUpdateOperationsInput | $Enums.EntityType
     entityId?: NullableIntFieldUpdateOperationsInput | number | null
-    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    details?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ActivityUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
+    entityType?: EnumEntityTypeFieldUpdateOperationsInput | $Enums.EntityType
     entityId?: NullableIntFieldUpdateOperationsInput | number | null
-    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    details?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -8519,12 +8617,28 @@ export namespace Prisma {
     _max?: NestedEnumNoteColorFilter<$PrismaModel>
   }
 
+  export type EnumActivityTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityType[]
+    notIn?: $Enums.ActivityType[]
+    not?: NestedEnumActivityTypeFilter<$PrismaModel> | $Enums.ActivityType
+  }
+
+  export type EnumEntityTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.EntityType | EnumEntityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EntityType[]
+    notIn?: $Enums.EntityType[]
+    not?: NestedEnumEntityTypeFilter<$PrismaModel> | $Enums.EntityType
+  }
+
   export type ActivityCountOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
-    description?: SortOrder
-    entityId?: SortOrder
     entityType?: SortOrder
+    entityId?: SortOrder
+    details?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -8538,9 +8652,11 @@ export namespace Prisma {
   export type ActivityMaxOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
-    description?: SortOrder
-    entityId?: SortOrder
     entityType?: SortOrder
+    entityId?: SortOrder
+    details?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -8548,9 +8664,11 @@ export namespace Prisma {
   export type ActivityMinOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
-    description?: SortOrder
-    entityId?: SortOrder
     entityType?: SortOrder
+    entityId?: SortOrder
+    details?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -8559,6 +8677,26 @@ export namespace Prisma {
     id?: SortOrder
     entityId?: SortOrder
     userId?: SortOrder
+  }
+
+  export type EnumActivityTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityType[]
+    notIn?: $Enums.ActivityType[]
+    not?: NestedEnumActivityTypeWithAggregatesFilter<$PrismaModel> | $Enums.ActivityType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActivityTypeFilter<$PrismaModel>
+    _max?: NestedEnumActivityTypeFilter<$PrismaModel>
+  }
+
+  export type EnumEntityTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EntityType | EnumEntityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EntityType[]
+    notIn?: $Enums.EntityType[]
+    not?: NestedEnumEntityTypeWithAggregatesFilter<$PrismaModel> | $Enums.EntityType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEntityTypeFilter<$PrismaModel>
+    _max?: NestedEnumEntityTypeFilter<$PrismaModel>
   }
 
   export type TaskCreateNestedManyWithoutUserInput = {
@@ -8835,6 +8973,14 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type EnumActivityTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ActivityType
+  }
+
+  export type EnumEntityTypeFieldUpdateOperationsInput = {
+    set?: $Enums.EntityType
+  }
+
   export type UserUpdateOneWithoutActivitiesNestedInput = {
     create?: XOR<UserCreateWithoutActivitiesInput, UserUncheckedCreateWithoutActivitiesInput>
     connectOrCreate?: UserCreateOrConnectWithoutActivitiesInput
@@ -9106,6 +9252,40 @@ export namespace Prisma {
     _max?: NestedEnumNoteColorFilter<$PrismaModel>
   }
 
+  export type NestedEnumActivityTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityType[]
+    notIn?: $Enums.ActivityType[]
+    not?: NestedEnumActivityTypeFilter<$PrismaModel> | $Enums.ActivityType
+  }
+
+  export type NestedEnumEntityTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.EntityType | EnumEntityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EntityType[]
+    notIn?: $Enums.EntityType[]
+    not?: NestedEnumEntityTypeFilter<$PrismaModel> | $Enums.EntityType
+  }
+
+  export type NestedEnumActivityTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityType | EnumActivityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityType[]
+    notIn?: $Enums.ActivityType[]
+    not?: NestedEnumActivityTypeWithAggregatesFilter<$PrismaModel> | $Enums.ActivityType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActivityTypeFilter<$PrismaModel>
+    _max?: NestedEnumActivityTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumEntityTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EntityType | EnumEntityTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EntityType[]
+    notIn?: $Enums.EntityType[]
+    not?: NestedEnumEntityTypeWithAggregatesFilter<$PrismaModel> | $Enums.EntityType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEntityTypeFilter<$PrismaModel>
+    _max?: NestedEnumEntityTypeFilter<$PrismaModel>
+  }
+
   export type TaskCreateWithoutUserInput = {
     title: string
     completed?: boolean
@@ -9187,19 +9367,23 @@ export namespace Prisma {
   }
 
   export type ActivityCreateWithoutUserInput = {
-    type: string
-    description: string
+    type: $Enums.ActivityType
+    entityType: $Enums.EntityType
     entityId?: number | null
-    entityType?: string | null
+    details?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
   }
 
   export type ActivityUncheckedCreateWithoutUserInput = {
     id?: number
-    type: string
-    description: string
+    type: $Enums.ActivityType
+    entityType: $Enums.EntityType
     entityId?: number | null
-    entityType?: string | null
+    details?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
   }
 
@@ -9321,10 +9505,12 @@ export namespace Prisma {
     OR?: ActivityScalarWhereInput[]
     NOT?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
     id?: IntFilter<"Activity"> | number
-    type?: StringFilter<"Activity"> | string
-    description?: StringFilter<"Activity"> | string
+    type?: EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
+    entityType?: EnumEntityTypeFilter<"Activity"> | $Enums.EntityType
     entityId?: IntNullableFilter<"Activity"> | number | null
-    entityType?: StringNullableFilter<"Activity"> | string | null
+    details?: StringNullableFilter<"Activity"> | string | null
+    ipAddress?: StringNullableFilter<"Activity"> | string | null
+    userAgent?: StringNullableFilter<"Activity"> | string | null
     createdAt?: DateTimeFilter<"Activity"> | Date | string
     userId?: IntNullableFilter<"Activity"> | number | null
   }
@@ -9639,10 +9825,12 @@ export namespace Prisma {
 
   export type ActivityCreateManyUserInput = {
     id?: number
-    type: string
-    description: string
+    type: $Enums.ActivityType
+    entityType: $Enums.EntityType
     entityId?: number | null
-    entityType?: string | null
+    details?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
     createdAt?: Date | string
   }
 
@@ -9728,28 +9916,34 @@ export namespace Prisma {
   }
 
   export type ActivityUpdateWithoutUserInput = {
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
+    entityType?: EnumEntityTypeFieldUpdateOperationsInput | $Enums.EntityType
     entityId?: NullableIntFieldUpdateOperationsInput | number | null
-    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    details?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ActivityUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
+    entityType?: EnumEntityTypeFieldUpdateOperationsInput | $Enums.EntityType
     entityId?: NullableIntFieldUpdateOperationsInput | number | null
-    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    details?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ActivityUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
+    entityType?: EnumEntityTypeFieldUpdateOperationsInput | $Enums.EntityType
     entityId?: NullableIntFieldUpdateOperationsInput | number | null
-    entityType?: NullableStringFieldUpdateOperationsInput | string | null
+    details?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

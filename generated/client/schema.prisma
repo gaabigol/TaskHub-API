@@ -58,6 +58,24 @@ enum NoteColor {
   RED
 }
 
+enum ActivityType {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  VIEW
+  OTHER
+}
+
+enum EntityType {
+  TASK
+  SHOPPING_ITEM
+  NOTE
+  USER
+  SYSTEM
+}
+
 model User {
   id             Int            @id @default(autoincrement())
   username       String         @unique
@@ -108,12 +126,18 @@ model Note {
 }
 
 model Activity {
-  id          Int      @id @default(autoincrement())
-  type        String
-  description String
-  entityId    Int?
-  entityType  String?
-  createdAt   DateTime @default(now())
-  userId      Int?
-  user        User?    @relation(fields: [userId], references: [id])
+  id         Int          @id @default(autoincrement())
+  type       ActivityType
+  entityType EntityType
+  entityId   Int?
+  details    String?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime     @default(now())
+  userId     Int?
+  user       User?        @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
 }

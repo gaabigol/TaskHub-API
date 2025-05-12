@@ -162,9 +162,11 @@ exports.Prisma.NoteScalarFieldEnum = {
 exports.Prisma.ActivityScalarFieldEnum = {
   id: 'id',
   type: 'type',
-  description: 'description',
-  entityId: 'entityId',
   entityType: 'entityType',
+  entityId: 'entityId',
+  details: 'details',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
   createdAt: 'createdAt',
   userId: 'userId'
 };
@@ -221,6 +223,24 @@ exports.NoteColor = exports.$Enums.NoteColor = {
   PURPLE: 'PURPLE',
   YELLOW: 'YELLOW',
   RED: 'RED'
+};
+
+exports.ActivityType = exports.$Enums.ActivityType = {
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT',
+  VIEW: 'VIEW',
+  OTHER: 'OTHER'
+};
+
+exports.EntityType = exports.$Enums.EntityType = {
+  TASK: 'TASK',
+  SHOPPING_ITEM: 'SHOPPING_ITEM',
+  NOTE: 'NOTE',
+  USER: 'USER',
+  SYSTEM: 'SYSTEM'
 };
 
 exports.Prisma.ModelName = {
