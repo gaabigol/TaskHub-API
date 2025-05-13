@@ -43,4 +43,8 @@ export class TaskService {
         if (!task) throw new NotFoundException('Task not found')
         return this.taskRepository.delete(task.id)
     }
+
+    async getAll(userId: number): Promise<Task[]> {
+        return this.taskRepository.findAllByUser(userId)
+    }
 }

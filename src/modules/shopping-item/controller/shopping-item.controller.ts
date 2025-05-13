@@ -18,6 +18,8 @@ import { ShoppingItemService } from '../service/shopping-item.service'
 import { FilterShoppingItemDto } from '../dto/filter-shopping.item.dto'
 import { UpdateShoppingItemDto } from '../dto/update-shopping-item.dto'
 import { ExportService } from 'src/core/infrastructure/providers/export/export.service'
+import { LogActivity } from 'src/core/common/decorators/activity.decorator'
+import { ActivityType, EntityType } from 'generated/client'
 
 @Controller('shopping-item')
 export class ShoppingItemController {
@@ -28,6 +30,7 @@ export class ShoppingItemController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
+    @LogActivity(ActivityType.CREATE, EntityType.SHOPPING_ITEM)
     async create(
         @Body() data: CreateShoppingItemDto,
         @SessionUser() session: Session,

@@ -95,4 +95,17 @@ export class ShoppingItemRepository implements BaseRepository<ShoppingItem> {
             },
         })
     }
+
+    async getAll(userId: number): Promise<ShoppingItem[]> {
+        return this.prisma.shoppingItem.findMany({
+            where: {
+                user: {
+                    id: userId,
+                },
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        })
+    }
 }

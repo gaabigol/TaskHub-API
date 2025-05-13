@@ -88,4 +88,17 @@ export class NoteRepository implements BaseRepository<Note> {
             },
         })
     }
+
+    async getAll(userId: number): Promise<Note[]> {
+        return this.prisma.note.findMany({
+            where: {
+                user: {
+                    id: userId,
+                },
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        })
+    }
 }

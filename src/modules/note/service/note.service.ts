@@ -42,4 +42,8 @@ export class NoteService {
         if (!task) throw new NotFoundException('note not found')
         return this.repository.delete(task.id)
     }
+
+    async getAll(userId: number): Promise<Note[]> {
+        return this.repository.getAll(userId)
+    }
 }

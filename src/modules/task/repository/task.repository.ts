@@ -110,4 +110,17 @@ export class TaskRepository implements BaseRepository<Task> {
             },
         })
     }
+
+    async getAll(userId: number): Promise<Task[]> {
+        return await this.prisma.task.findMany({
+            where: {
+                user: {
+                    id: userId,
+                },
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        })
+    }
 }

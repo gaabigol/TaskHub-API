@@ -17,6 +17,8 @@ import { UpdateNoteDto } from '../dto/update-note.dto'
 import { SessionUser } from 'src/core/common/decorators/session-user.decorator'
 import { Session } from '../../../core/application/dtos/session.dto'
 import { FilterNoteDto } from '../dto/filter-note.dto'
+import { ActivityType, EntityType } from 'generated/client'
+import { LogActivity } from 'src/core/common/decorators/activity.decorator'
 
 @Controller('note')
 export class NoteController {
@@ -24,6 +26,7 @@ export class NoteController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
+    @LogActivity(ActivityType.CREATE, EntityType.NOTE)
     async create(@Body() data: CreateNoteDto, @SessionUser() session: Session) {
         const note = await this.noteService.create(data, session.sub)
         return {

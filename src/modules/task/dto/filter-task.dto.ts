@@ -34,4 +34,7 @@ export class FilterTaskDto {
     @Type(() => Date)
     @IsDate()
     createdAt?: Date
+
+    @IsOptional()
+    limit?: number
 }
