@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { Parser as CsvParser } from 'json2csv'
-import { FormatDateUtil } from 'src/core/common/util/format.date'
-import { ExportableEntity } from 'src/core/domain/types/export.type'
+import { FormatDateUtil } from '../../../common/util/format.date'
+import { ExportableEntity } from '../../../domain/types/export.type'
 import {
     DocumentHeader,
     ExportConfig,
     IExportService,
-} from 'src/core/domain/interfaces/export/export.interface'
+} from '../../../domain/interfaces/export/export.interface'
 
 @Injectable()
 export class ExportService implements IExportService {

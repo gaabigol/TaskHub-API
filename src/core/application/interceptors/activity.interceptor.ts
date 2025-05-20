@@ -5,8 +5,8 @@ import {
     NestInterceptor,
 } from '@nestjs/common'
 import { Observable, tap } from 'rxjs'
-import { EntityMetadataHelper } from 'src/core/common/helpers/entity-metadata.helper'
-import { ActivityService } from 'src/modules/activity/service/activity.service'
+import { EntityMetadataHelper } from '../../common/helpers/entity-metadata.helper'
+import { ActivityService } from '../../../modules/activity/service/activity.service'
 
 @Injectable()
 export class ActivityInterceptor implements NestInterceptor {
