@@ -14,13 +14,13 @@ import {
 } from '@nestjs/common'
 import { TaskService } from '../service/task.service'
 import { CreateTaskDto } from '../dto/create-task.dto'
-import { SessionUser } from 'src/core/common/decorators/session-user.decorator'
+import { SessionUser } from '../../../core/common/decorators/session-user.decorator'
 import { Session } from '../../../core/application/dtos/session.dto'
 import { UpdateTaskDto } from '../dto/update-task.dto'
 import { FilterTaskDto } from '../dto/filter-task.dto'
-import { ExportService } from 'src/core/infrastructure/providers/export/export.service'
+import { ExportService } from '../../../core/infrastructure/providers/export/export.service'
 import { Response } from 'express'
-import { LogActivity } from 'src/core/common/decorators/activity.decorator'
+import { LogActivity } from '../../../core/common/decorators/activity.decorator'
 import { ActivityType, EntityType } from 'generated/client'
 
 @Controller('task')

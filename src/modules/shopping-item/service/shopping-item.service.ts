@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateShoppingItemDto } from '../dto/create-shopping-item.dto'
 import { ShoppingItemRepository } from '../repository/shopping-item.repository'
-import { UserService } from 'src/modules/user/service/user.service'
+import { UserService } from '../../user/service/user.service'
 import { FilterShoppingItemDto } from '../dto/filter-shopping.item.dto'
 import { UpdateShoppingItemDto } from '../dto/update-shopping-item.dto'
 import { ShoppingItem } from 'generated/client'

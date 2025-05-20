@@ -1,6 +1,6 @@
-import { BaseRepository } from 'src/core/domain/interfaces/base-repository.interface.ts'
+import { BaseRepository } from '../../../core/domain/interfaces/base-repository.interface.ts'
+import { PrismaService } from '../../../core/infrastructure/database/prisma/prisma.service'
 import { Activity, Prisma } from 'generated/client'
-import { PrismaService } from 'src/core/infrastructure/database/prisma/prisma.service'
 import { Injectable } from '@nestjs/common'
 @Injectable()
 export class ActivityRepository implements BaseRepository<Activity> {

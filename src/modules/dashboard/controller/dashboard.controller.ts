@@ -1,6 +1,6 @@
 import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common'
 import { DashboardService } from '../service/dashboard.service'
-import { SessionUser } from 'src/core/common/decorators/session-user.decorator'
+import { SessionUser } from '../../../core/common/decorators/session-user.decorator'
 import { Session } from '../../../core/application/dtos/session.dto'
 
 @Controller('dashboard')

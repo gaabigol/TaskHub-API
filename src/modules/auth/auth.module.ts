@@ -4,7 +4,7 @@ import { AuthService } from './service/auth.service'
 import { BcryptModule } from '../../core/infrastructure/providers/Bcrypt/bcrypt.module'
 import { UserModule } from '../user/user.module'
 import { ConfigModule } from '@nestjs/config'
-import jwtConfig from 'src/core/infrastructure/config/jwt.config'
+import jwtConfig from '../../core/infrastructure/config/jwt.config'
 import { JwtModule } from '@nestjs/jwt'
 
 @Module({

@@ -20,7 +20,7 @@ import { ShoppingItemModule } from './modules/shopping-item/shopping-item.module
 import { NoteModule } from './modules/note/note.module'
 import { ActivityModule } from './modules/activity/activity.module'
 import { ActivityInterceptor } from './core/application/interceptors/activity.interceptor'
-import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module'
 
 @Module({
     imports: [

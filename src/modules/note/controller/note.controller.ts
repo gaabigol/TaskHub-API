@@ -14,11 +14,11 @@ import {
 import { NoteService } from '../service/note.service'
 import { CreateNoteDto } from '../dto/create-note.dto'
 import { UpdateNoteDto } from '../dto/update-note.dto'
-import { SessionUser } from 'src/core/common/decorators/session-user.decorator'
+import { SessionUser } from '../../../core/common/decorators/session-user.decorator'
 import { Session } from '../../../core/application/dtos/session.dto'
 import { FilterNoteDto } from '../dto/filter-note.dto'
 import { ActivityType, EntityType } from 'generated/client'
-import { LogActivity } from 'src/core/common/decorators/activity.decorator'
+import { LogActivity } from '../../../core/common/decorators/activity.decorator'
 
 @Controller('note')
 export class NoteController {

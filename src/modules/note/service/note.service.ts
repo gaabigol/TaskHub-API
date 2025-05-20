@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateNoteDto } from '../dto/create-note.dto'
 import { NoteRepository } from '../repository/note.repository'
-import { UserService } from 'src/modules/user/service/user.service'
+import { UserService } from '../../user/service/user.service'
 import { FilterNoteDto } from '../dto/filter-note.dto'
 import { Note } from 'generated/client'
 import { UpdateNoteDto } from '../dto/update-note.dto'

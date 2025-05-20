@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { NoteService } from 'src/modules/note/service/note.service'
-import { ShoppingItemService } from 'src/modules/shopping-item/service/shopping-item.service'
+import { NoteService } from '../../note/service/note.service'
+import { ShoppingItemService } from '../../shopping-item/service/shopping-item.service'
 import { TaskService } from 'src/modules/task/service/task.service'
 @Injectable()
 export class DashboardService {

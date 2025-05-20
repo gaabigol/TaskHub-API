@@ -12,13 +12,13 @@ import {
     ParseIntPipe,
 } from '@nestjs/common'
 import { CreateShoppingItemDto } from '../dto/create-shopping-item.dto'
-import { SessionUser } from 'src/core/common/decorators/session-user.decorator'
+import { SessionUser } from '../../../core/common/decorators/session-user.decorator'
 import { Session } from '../../../core/application/dtos/session.dto'
 import { ShoppingItemService } from '../service/shopping-item.service'
 import { FilterShoppingItemDto } from '../dto/filter-shopping.item.dto'
 import { UpdateShoppingItemDto } from '../dto/update-shopping-item.dto'
-import { ExportService } from 'src/core/infrastructure/providers/export/export.service'
-import { LogActivity } from 'src/core/common/decorators/activity.decorator'
+import { ExportService } from '../../../core/infrastructure/providers/export/export.service'
+import { LogActivity } from '../../../core/common/decorators/activity.decorator'
 import { ActivityType, EntityType } from 'generated/client'
 
 @Controller('shopping-item')

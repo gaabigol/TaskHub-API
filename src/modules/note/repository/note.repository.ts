@@ -1,6 +1,6 @@
-import { BaseRepository } from 'src/core/domain/interfaces/base-repository.interface.ts'
+import { BaseRepository } from '../../../core/domain/interfaces/base-repository.interface.ts'
 import { Note, Prisma } from 'generated/client'
-import { PrismaService } from 'src/core/infrastructure/database/prisma/prisma.service'
+import { PrismaService } from '../../../core/infrastructure/database/prisma/prisma.service'
 import { Injectable } from '@nestjs/common'
 import { UpdateNoteDto } from '../dto/update-note.dto'
 import { FilterNoteDto } from '../dto/filter-note.dto'

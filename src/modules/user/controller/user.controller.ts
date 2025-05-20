@@ -11,7 +11,7 @@ import { UserService } from '../service/user.service'
 import { User } from 'generated/client'
 import { CreateUserDto } from '../dto/create-user.dto'
 import { Public } from '../../../core/common/decorators/public.decorator'
-import { SessionUser } from 'src/core/common/decorators/session-user.decorator'
+import { SessionUser } from '../../../core/common/decorators/session-user.decorator'
 import { Session } from '../../../core/application/dtos/session.dto'
 import { UpdateUserDto } from '../dto/update-user.dto'
 @Controller('user')
