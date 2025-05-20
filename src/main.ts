@@ -3,17 +3,19 @@ import { AppModule } from './app.module'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule)
+    const app = await NestFactory.create(AppModule, {
+        logger: ['error', 'warn', 'log'],
+    })
 
     app.enableCors({
-        origin: ['http://localhost:3001'],
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+        origin: ['http://localhost:3000'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         credentials: true,
     })
 
     app.useGlobalPipes(
         new ValidationPipe({
-            whitelist: true, // remove unknown properties from request payload
+            whitelist: true,
             forbidNonWhitelisted: true,
         }),
     )
