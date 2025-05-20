@@ -87,6 +87,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -147,6 +150,11 @@ exports.Prisma.ActivityScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
@@ -261,17 +269,17 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "file:./dev.db"
+        "value": "postgres://neondb_owner:npg_LWiNJ1bwuZ4s@ep-shy-brook-a4v6c8hd-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/client\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Category {\n  GENERAL\n  DEVELOPMENT\n  DESIGN\n  WORK\n  SEARCH\n}\n\nenum Priority {\n  MEDIUM\n  HIGH\n  LOW\n}\n\nenum ShoppingCategory {\n  GENERAL\n  GROCERY\n  FRUITS\n  VEGETABLES\n  DAIRY\n  BAKERY\n  MEAT\n  BEVERAGES\n  CLEANING\n  HOUSEHOLD\n}\n\nenum Unit {\n  UN\n  KG\n  G\n  L\n  ML\n  PCT\n  CX\n}\n\nenum NoteColor {\n  BLUE\n  GREEN\n  PURPLE\n  YELLOW\n  RED\n}\n\nenum ActivityType {\n  CREATE\n  UPDATE\n  DELETE\n  LOGIN\n  LOGOUT\n  VIEW\n  OTHER\n}\n\nenum EntityType {\n  TASK\n  SHOPPING_ITEM\n  NOTE\n  USER\n  SYSTEM\n}\n\nmodel User {\n  id             Int            @id @default(autoincrement())\n  username       String         @unique\n  email          String         @unique\n  password       String\n  displayName    String?\n  avatarInitials String?\n  tasks          Task[]\n  shoppingItems  ShoppingItem[]\n  notes          Note[]\n  activities     Activity[]\n  createdAt      DateTime       @default(now())\n  updatedAt      DateTime       @default(now()) @updatedAt\n}\n\nmodel Task {\n  id        Int      @id @default(autoincrement())\n  title     String\n  completed Boolean  @default(false)\n  priority  Priority @default(MEDIUM)\n  category  Category @default(GENERAL)\n  createdAt DateTime @default(now())\n  userId    Int?\n  user      User?    @relation(fields: [userId], references: [id])\n}\n\nmodel ShoppingItem {\n  id        Int              @id @default(autoincrement())\n  name      String\n  quantity  Int              @default(1)\n  unit      Unit             @default(UN)\n  category  ShoppingCategory @default(GENERAL)\n  purchased Boolean          @default(false)\n  createdAt DateTime         @default(now())\n  updatedAt DateTime         @default(now()) @updatedAt\n  userId    Int?\n  user      User?            @relation(fields: [userId], references: [id])\n}\n\nmodel Note {\n  id        Int       @id @default(autoincrement())\n  title     String\n  content   String\n  color     NoteColor @default(BLUE)\n  createdAt DateTime  @default(now())\n  userId    Int?\n  user      User?     @relation(fields: [userId], references: [id])\n}\n\nmodel Activity {\n  id         Int          @id @default(autoincrement())\n  type       ActivityType\n  entityType EntityType\n  entityId   Int?\n  details    String?\n  ipAddress  String?\n  userAgent  String?\n  createdAt  DateTime     @default(now())\n  userId     Int?\n  user       User?        @relation(fields: [userId], references: [id])\n\n  @@index([userId])\n  @@index([entityType, entityId])\n  @@index([createdAt])\n}\n",
-  "inlineSchemaHash": "e07d553cac36db0aac9b36907f5204b93cfe6a1ae013f22933a081514c063db3",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Category {\n  GENERAL\n  DEVELOPMENT\n  DESIGN\n  WORK\n  SEARCH\n}\n\nenum Priority {\n  MEDIUM\n  HIGH\n  LOW\n}\n\nenum ShoppingCategory {\n  GENERAL\n  GROCERY\n  FRUITS\n  VEGETABLES\n  DAIRY\n  BAKERY\n  MEAT\n  BEVERAGES\n  CLEANING\n  HOUSEHOLD\n}\n\nenum Unit {\n  UN\n  KG\n  G\n  L\n  ML\n  PCT\n  CX\n}\n\nenum NoteColor {\n  BLUE\n  GREEN\n  PURPLE\n  YELLOW\n  RED\n}\n\nenum ActivityType {\n  CREATE\n  UPDATE\n  DELETE\n  LOGIN\n  LOGOUT\n  VIEW\n  OTHER\n}\n\nenum EntityType {\n  TASK\n  SHOPPING_ITEM\n  NOTE\n  USER\n  SYSTEM\n}\n\nmodel User {\n  id             Int            @id @default(autoincrement())\n  username       String         @unique\n  email          String         @unique\n  password       String\n  displayName    String?\n  avatarInitials String?\n  tasks          Task[]\n  shoppingItems  ShoppingItem[]\n  notes          Note[]\n  activities     Activity[]\n  createdAt      DateTime       @default(now())\n  updatedAt      DateTime       @default(now()) @updatedAt\n}\n\nmodel Task {\n  id        Int      @id @default(autoincrement())\n  title     String\n  completed Boolean  @default(false)\n  priority  Priority @default(MEDIUM)\n  category  Category @default(GENERAL)\n  createdAt DateTime @default(now())\n  userId    Int?\n  user      User?    @relation(fields: [userId], references: [id])\n}\n\nmodel ShoppingItem {\n  id        Int              @id @default(autoincrement())\n  name      String\n  quantity  Int              @default(1)\n  unit      Unit             @default(UN)\n  category  ShoppingCategory @default(GENERAL)\n  purchased Boolean          @default(false)\n  createdAt DateTime         @default(now())\n  updatedAt DateTime         @default(now()) @updatedAt\n  userId    Int?\n  user      User?            @relation(fields: [userId], references: [id])\n}\n\nmodel Note {\n  id        Int       @id @default(autoincrement())\n  title     String\n  content   String\n  color     NoteColor @default(BLUE)\n  createdAt DateTime  @default(now())\n  userId    Int?\n  user      User?     @relation(fields: [userId], references: [id])\n}\n\nmodel Activity {\n  id         Int          @id @default(autoincrement())\n  type       ActivityType\n  entityType EntityType\n  entityId   Int?\n  details    String?\n  ipAddress  String?\n  userAgent  String?\n  createdAt  DateTime     @default(now())\n  userId     Int?\n  user       User?        @relation(fields: [userId], references: [id])\n\n  @@index([userId])\n  @@index([entityType, entityId])\n  @@index([createdAt])\n}\n",
+  "inlineSchemaHash": "d1fc0b885118b5d3153b7a51995dc46f62a1e30c58dab54f698593a8b99883fd",
   "copyEngine": true
 }
 
