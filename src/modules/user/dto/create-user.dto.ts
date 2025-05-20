@@ -5,6 +5,7 @@ import {
     MinLength,
     MaxLength,
     Matches,
+    IsOptional,
 } from 'class-validator'
 
 export class CreateUserDto {
@@ -16,6 +17,13 @@ export class CreateUserDto {
     @IsNotEmpty({ message: 'O email é obrigatório' })
     @IsEmail({}, { message: 'Formato de email inválido' })
     email: string
+
+    @IsString({ message: 'O nome de exibição deve ser uma string' })
+    @MaxLength(50, {
+        message: 'O nome de exibição deve ter no máximo 50 caracteres',
+    })
+    @IsOptional()
+    displayName?: string
 
     @IsNotEmpty({ message: 'A senha é obrigatória' })
     @MinLength(8, { message: 'A senha deve ter pelo menos 8 caracteres' })

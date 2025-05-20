@@ -3,12 +3,11 @@ import {
     Injectable,
     NotFoundException,
 } from '@nestjs/common'
-
 import { UserRepository } from '../repository/user.repository'
-import { PaginationDto } from 'src/core/application/dtos/pagination.dto'
 import { User } from 'generated/client'
 import { CreateUserDto } from '../dto/create-user.dto'
 import { HashingServiceProtocol } from '../../../core/domain/abstractions/hashing.service'
+import { UpdateUserDto } from '../dto/update-user.dto'
 
 @Injectable()
 export class UserService {
@@ -31,27 +30,25 @@ export class UserService {
         })
     }
 
-    async findAll(data: PaginationDto): Promise<{
-        data: User[]
-        meta: {
-            total: number
-            page: number
-            limit: number
-            lastPage: number
-        }
-    }> {
-        return await this.repository.findAll(data)
-    }
-
     async verifyByEmail(email: string): Promise<User> {
         const user = await this.repository.verifyByEmail(email)
         if (!user) throw new NotFoundException('User not found')
         return user
     }
 
-    async findById(id: number): Promise<User> {
+    async findById(id: number): Promise<Omit<User, 'password'>> {
         const user = await this.repository.findById(id)
         if (!user) throw new NotFoundException('User not found')
+        return user
+    }
+
+    async update(
+        id: number,
+        data: UpdateUserDto,
+    ): Promise<Omit<User, 'password'>> {
+        const user = await this.repository.findById(id)
+        if (!user) throw new NotFoundException('User not found')
+        await this.repository.update(id, data)
         return user
     }
 }

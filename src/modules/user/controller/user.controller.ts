@@ -4,15 +4,16 @@ import {
     Get,
     HttpCode,
     HttpStatus,
+    Patch,
     Post,
-    Query,
 } from '@nestjs/common'
 import { UserService } from '../service/user.service'
-import { PaginationDto } from 'src/core/application/dtos/pagination.dto'
 import { User } from 'generated/client'
 import { CreateUserDto } from '../dto/create-user.dto'
 import { Public } from '../../../core/common/decorators/public.decorator'
-
+import { SessionUser } from 'src/core/common/decorators/session-user.decorator'
+import { Session } from '../../../core/application/dtos/session.dto'
+import { UpdateUserDto } from '../dto/update-user.dto'
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
@@ -37,15 +38,25 @@ export class UserController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    async findAll(@Query() data: PaginationDto): Promise<{
-        data: User[]
-        meta: {
-            total: number
-            page: number
-            limit: number
-            lastPage: number
-        }
+    async findById(@SessionUser() session: Session): Promise<{
+        success: boolean
+        data: Omit<User, 'password'>
     }> {
-        return await this.userService.findAll(data)
+        const user = await this.userService.findById(session.sub)
+        return {
+            success: true,
+            data: user,
+        }
+    }
+
+    @Patch()
+    @HttpCode(HttpStatus.OK)
+    async update(@Body() data: UpdateUserDto, @SessionUser() session: Session) {
+        const user = await this.userService.update(session.sub, data)
+        return {
+            success: true,
+            message: 'User updated successfully',
+            data: user,
+        }
     }
 }

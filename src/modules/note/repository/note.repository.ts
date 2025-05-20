@@ -20,7 +20,11 @@ export class NoteRepository implements BaseRepository<Note> {
             where: {
                 id,
             },
-            data,
+            data: {
+                title: data.title,
+                content: data.content,
+                color: data.color,
+            },
         })
     }
 

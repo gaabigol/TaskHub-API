@@ -33,7 +33,7 @@ export class TaskService {
     }
 
     async update(userId: number, data: UpdateTaskDto): Promise<Task> {
-        const task = await this.taskRepository.findByUserAndId(userId, data.id)
+        const task = await this.taskRepository.findByUserAndId(data.id, userId)
         if (!task) throw new NotFoundException('Task not found')
         return this.taskRepository.update(task.id, data)
     }

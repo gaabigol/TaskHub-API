@@ -32,7 +32,7 @@ export class NoteService {
     }
 
     async update(userId: number, data: UpdateNoteDto): Promise<Note> {
-        const task = await this.repository.findByUserAndId(userId, data.id)
+        const task = await this.repository.findByUserAndId(data.id, userId)
         if (!task) throw new NotFoundException('Note not found')
         return this.repository.update(task.id, data)
     }
